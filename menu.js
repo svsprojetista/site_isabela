@@ -5,4 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
   toggle.addEventListener('click', function () {
     menu.classList.toggle('open');
   });
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      menu.classList.remove('open');
+    }
+  });
+  document.addEventListener('click', function (e) {
+    if (!menu.contains(e.target) && e.target !== toggle) {
+      menu.classList.remove('open');
+    }
+  });
 });

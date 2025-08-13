@@ -4,7 +4,7 @@
    - Fallback: se mask não for suportado, usamos o ::after (fade clássico).
    - Mantém originais intactos.
 */
-
+html{ scroll-behavior: smooth; }
 /* ===== Reset & Tokens ===== */
 *{ margin:0; padding:0; box-sizing:border-box; }
 :root{
@@ -39,9 +39,18 @@ header{
   background:transparent; padding:20px 40px; height:auto;
 }
 .navbar{ display:flex; justify-content:flex-end; align-items:center; }
+.menu-wrapper{ display:block; }
+.menu-toggle{
+  display:none;
+  background:none;
+  border:0;
+  color:#fff;
+  font-size:1.8rem;
+  cursor:pointer;
+}
 .menu{ list-style:none; display:flex; gap:20px; }
 .menu li a{
-  text-decoration:none; color:#fff; font-weight:bold;
+  text-decoration:none; color:#000; font-weight:bold;
   padding:8px 10px; border-radius:10px;
 }
 .menu li a:hover{ background:rgba(255,255,255,.14); }
@@ -69,7 +78,7 @@ header{
 .overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 100%);
+  background:linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,0) 100%);
   z-index:1;
 }
 
@@ -127,6 +136,25 @@ header{
 }
 .chip:hover{ background:#E3F2FA; }
 
+
+/* ===== Animações de entrada ===== */
+.fade-up{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.fade-up.in-view{
+  opacity:1;
+  transform:none;
+}
+@media (prefers-reduced-motion: reduce){
+  .fade-up{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+}
+
 /* ===== Contato ===== */
 #contato a {
   font-weight: 700;
@@ -156,8 +184,33 @@ header{
     background-image: url('img/hero-mobile.jpg') !important;
     background-position: center calc(50% + var(--hero-shift));
   }
-  .menu{ gap:10px; }
-  .menu li a{ font-size:.9rem; }
+  .navbar{ position:relative; }
+  .menu-wrapper{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:rgba(212,167,189,.95);
+    padding:10px 20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    opacity:0;
+    transform:translateY(-10px);
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .menu-wrapper.open{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+  }
+  .menu{ gap:10px; flex-direction:column; }
+  .menu li a{ font-size:.9rem; display:block; }
+  .menu-toggle{
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+  }
   #servicos .cards{ grid-template-columns:1fr; }
   .chip{ font-size:.85rem; padding:8px 12px; }
   .section{ padding:48px 16px; }

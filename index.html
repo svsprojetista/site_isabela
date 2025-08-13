@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
 
   <!-- JSON-LD -->
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=XMHBAMfofOIl2P3YjkH1umOnrcaP6Os3uxszSBgEFGPfhKDcR6HNnN4DpdI6U-HZwy8EbxIB1HhYL8DDfkYutDmO5WpWLEEr_9J56XGUH3_aUPkWm9gdtmlpl-Ja5PirW9KTjIs3SGZGSJ_ZXe8ppkiBfQzsx_a2Qs8qBU-AiOFZcbbbcU8stzn4h0tb-CNGTRHZ-2oTtQGQnJDB9keMs9zzlJHw_IB6ba5BrrOv5Rs" charset="UTF-8"></script><script type="application/ld+json">
+  
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -44,11 +44,14 @@
 <body>
   <header>
     <nav class="navbar">
-      <ul class="menu">
-        <li><a href="#sobre">Sobre mim</a></li>
-        <li><a href="#servicos">Especialidades</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
+   <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+      <div class="menu-wrapper">
+        <ul class="menu">
+          <li><a href="#sobre">Sobre mim</a></li>
+          <li><a href="#servicos">Especialidades</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -130,10 +133,13 @@
     </div>
   </section>
 
+
   <!-- Botão flutuante do WhatsApp -->
-  <a class="whatsapp-float" href="https://wa.me/31997276603" target="_blank">
+  <a class="whatsapp-float" href="https://wa.me/31997276603" target="_blank"  rel="noopener">
     <img src="img/whatsapp.png" alt="WhatsApp">
   </a>
+ <!-- JS: menu responsivo -->
+  <script src="menu.js" defer></script>
 
   <!-- JS: fade dinâmico e parallax leve -->
   <script src="fade.v1.js" defer></script>

@@ -48,10 +48,20 @@
     const shift = - Math.round(prog * maxShift);
     root.style.setProperty('--hero-shift', shift + 'px');
   }
+  const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let reduceMotion = reduceMotionQuery.matches;
 
+  reduceMotionQuery.addEventListener('change', e => {
+    reduceMotion = e.matches;
+    onTick();
+  });
   function onTick(){
     updateMaskStops();
-    updateParallax();
+     if(!reduceMotion){
+      updateParallax();
+    } else {
+      root.style.setProperty('--hero-shift', '0px');
+    }
   }
 
   // Eventos
@@ -64,4 +74,26 @@
 
   // Primeira medição
   onTick();
+})();
+// IntersectionObserver para animações de entrada
+(function(){
+  const elements = document.querySelectorAll('.fade-up');
+  if(!elements.length) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){
+    elements.forEach(el => el.classList.add('in-view'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  elements.forEach(el => observer.observe(el));
 })();
